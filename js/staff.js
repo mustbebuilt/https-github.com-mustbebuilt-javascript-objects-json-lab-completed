@@ -1,49 +1,47 @@
- (function(){
-// // start
-var staff = JSON.parse(localStorage.getItem('staffList'));
-if(staff === null){
-    staff = [];
-}
+(() => {
+  // Start
+  let staff = JSON.parse(localStorage.getItem("staffList")) || [];
 
+  const rebuildList = () => {
+    const staffTable = document.getElementById("staffTable");
+    staffTable.innerHTML = "";
 
-var rebuildList = function(){
-    document.getElementById('staffTable').innerHTML = "";
-    staff.forEach(function(element) {
-        var newStaffRow = document.createElement("tr");
-        var newStaffName = document.createElement("td");
-        newStaffName.innerHTML = element.name;
-        var newStaffEmail = document.createElement("td");
-        newStaffEmail.innerHTML = element.email;
-        newStaffRow.appendChild(newStaffName);
-        newStaffRow.appendChild(newStaffEmail);
-        document.getElementById('staffTable').appendChild(newStaffRow);
+    staff.forEach((element) => {
+      const newStaffRow = document.createElement("tr");
+
+      const newStaffName = document.createElement("td");
+      newStaffName.innerHTML = element.name;
+
+      const newStaffEmail = document.createElement("td");
+      newStaffEmail.innerHTML = element.email;
+
+      newStaffRow.appendChild(newStaffName);
+      newStaffRow.appendChild(newStaffEmail);
+      staffTable.appendChild(newStaffRow);
     });
-    localStorage.setItem('staffList', JSON.stringify(staff));
-}
 
-// localstorage
-if(localStorage.getItem("count") === null){
+    localStorage.setItem("staffList", JSON.stringify(staff));
+  };
+
+  if (!localStorage.getItem("count")) {
     localStorage.setItem("count", 1);
-}else{
-    localStorage.setItem("count", parseInt(localStorage.getItem("count"))+1);
-}
+  } else {
+    localStorage.setItem("count", parseInt(localStorage.getItem("count")) + 1);
+  }
 
-// document.getElementById("myParagraph").addEventListener("click",(ev)=>{
-//     console.info("hi I was clicked")
-//     console.info(ev.target)
-//     ev.target.style.backgroundColor = "#f00";
-// })
-
-document.getElementById("addStaffForm").addEventListener("submit", function(ev){
+  document.getElementById("addStaffForm").addEventListener("submit", (ev) => {
     ev.preventDefault();
-    let newStaffName = document.getElementById('staffName').value;
-    let newStaffEmail= document.getElementById('staffEmail').value;
-    staff.push({name: newStaffName, email: newStaffEmail});
-    console.dir(staff)
+
+    const newStaffName = document.getElementById("staffName").value;
+    const newStaffEmail = document.getElementById("staffEmail").value;
+
+    staff.push({ name: newStaffName, email: newStaffEmail });
+    console.dir(staff);
+
     rebuildList();
-})
+  });
 
-rebuildList();
+  rebuildList();
 
-// // end
- })();
+  // End
+})();
