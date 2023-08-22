@@ -1,47 +1,24 @@
 (() => {
-  // Start
-  let staff = JSON.parse(localStorage.getItem("staffList")) || [];
+  fetch("data/staff.json") //
+    .then((response) => response.json())
+    .then((data) => {
+      const staffTable = document.getElementById("staffTable");
 
-  const rebuildList = () => {
-    const staffTable = document.getElementById("staffTable");
-    staffTable.innerHTML = "";
+      data.forEach((item) => {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("td");
+        const emailCell = document.createElement("td");
 
-    staff.forEach((element) => {
-      const newStaffRow = document.createElement("tr");
+        nameCell.textContent = `${item.first_name} " + ${item.last_name}`;
+        emailCell.textContent = item.email;
 
-      const newStaffName = document.createElement("td");
-      newStaffName.innerHTML = element.name;
-
-      const newStaffEmail = document.createElement("td");
-      newStaffEmail.innerHTML = element.email;
-
-      newStaffRow.appendChild(newStaffName);
-      newStaffRow.appendChild(newStaffEmail);
-      staffTable.appendChild(newStaffRow);
+        row.appendChild(nameCell);
+        row.appendChild(emailCell);
+        staffTable.appendChild(row);
+      });
+    })
+    .catch((error) => {
+      console.error("Error loading JSON:", error);
     });
-
-    localStorage.setItem("staffList", JSON.stringify(staff));
-  };
-
-  if (!localStorage.getItem("count")) {
-    localStorage.setItem("count", 1);
-  } else {
-    localStorage.setItem("count", parseInt(localStorage.getItem("count")) + 1);
-  }
-
-  document.getElementById("addStaffForm").addEventListener("submit", (ev) => {
-    ev.preventDefault();
-
-    const newStaffName = document.getElementById("staffName").value;
-    const newStaffEmail = document.getElementById("staffEmail").value;
-
-    staff.push({ name: newStaffName, email: newStaffEmail });
-    console.dir(staff);
-
-    rebuildList();
-  });
-
-  rebuildList();
-
   // End
 })();
