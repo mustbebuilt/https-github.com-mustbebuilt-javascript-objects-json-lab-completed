@@ -1,5 +1,5 @@
-# Working with Javascript Objects - Starter Repo
+# Completed Example: Working with Javascript Objects
 
-This Repo is designed as a teaching aid for those interesting in learning about Javascript Objects.
+This is a completed example you are free to use.
 
-The instructions for this tutorial are in the [Repo Wiki](https://github.com/mustbebuilt/javascript-objects-json-lab/wiki).
+If you are interested in how it was built then you can follow through the instructions in Wiki attached to this [Repo](https://github.com/mustbebuilt/javascript-objects-json-lab).
