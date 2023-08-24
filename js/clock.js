@@ -26,7 +26,7 @@
   const updateTime = () => {
     console.info("tick tock");
     const myDate = new Date();
-    myNode.innerHTML = myDate.toLocaleTimeString([], { timeStyle: "medium" });
+    myNode.innerHTML = myDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
     updateClockHands(myDate);
   };
 
