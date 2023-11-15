@@ -9,7 +9,7 @@
         const nameCell = document.createElement("td");
         const emailCell = document.createElement("td");
 
-        nameCell.textContent = `${item.first_name} " + ${item.last_name}`;
+        nameCell.textContent = `${item.first_name} ${item.last_name}`;
         emailCell.textContent = item.email;
 
         row.appendChild(nameCell);
