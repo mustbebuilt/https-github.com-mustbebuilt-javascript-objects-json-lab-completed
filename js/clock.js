@@ -9,7 +9,13 @@
 
   digitalClock.appendChild(myNode);
 
-  const updateClockHands = (myDate) => {
+  const updateTime = () => {
+    console.info("tick tock");
+    const myDate = new Date();
+    myNode.innerHTML = myDate.toLocaleTimeString("en-GB", {
+      timeStyle: "medium",
+    });
+    // analogue clock
     const seconds = myDate.getSeconds();
     const minutes = myDate.getMinutes();
     const hours = myDate.getHours() + minutes / 60;
@@ -21,13 +27,6 @@
     secondHand.style.transform = `rotate(${rotSeconds}deg)`;
     minHand.style.transform = `rotate(${rotMins}deg)`;
     hrHand.style.transform = `rotate(${rotHours}deg)`;
-  };
-
-  const updateTime = () => {
-    console.info("tick tock");
-    const myDate = new Date();
-    myNode.innerHTML = myDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-    updateClockHands(myDate);
   };
 
   setInterval(updateTime, 1000);
